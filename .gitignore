@@ -1,0 +1,30 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Variables de entorno y credenciales
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*service-account*.json
+*credentials*.json
+
+# Datos locales y bases de datos
+data/landing/
+*.duckdb
+*.duckdb.wal
+*.db
+
+# Node.js / React
+node_modules/
+dist/
+
+# Archivos temporales y editores
+.vscode/
+.idea/
+*.log
+.DS_Store
