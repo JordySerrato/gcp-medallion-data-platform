@@ -1,0 +1,18 @@
+
+name: gcp-medallion-local
+
+services:
+  gcs-emulator:
+    image: fsouza/fake-gcs-server:latest
+
+    command:
+      - "-scheme"
+      - "http"
+
+    ports:
+      - "127.0.0.1:4444:4443"
+
+    volumes:
+      - ./data/landing:/data
+
+    restart: unless-stopped

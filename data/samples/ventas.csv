@@ -1,0 +1,6 @@
+venta_id,fecha,producto_id,producto,categoria,cantidad,precio_unitario,tienda
+1001,2026-11-20,P001,Arroz,Abarrotes,3,5.50,Lima
+1002,2026-11-20,P002,Leche,Lacteos,2,4.80,Trujillo
+1003,2026-11-20,P003,Azucar,Abarrotes,5,4.20,Lima
+1004,2026-11-20,P004,Aceite,Abarrotes,2,10.50,Chiclayo
+1005,2026-11-20,P005,Yogurt,Lacteos,4,3.80,Lima
