@@ -12,11 +12,28 @@ from google.auth.credentials import AnonymousCredentials
 # 1. CONFIGURACIÓN
 # ==================================================
 
-os.environ["STORAGE_EMULATOR_HOST"] = "http://127.0.0.1:4444"
 
-PROJECT_ID = "local-project"
-BUCKET_NAME = "medallion-landing"
+# ==========================================
+# CONFIGURACION DEL EMULADOR GCS
+# ==========================================
+
+os.environ.setdefault(
+    "STORAGE_EMULATOR_HOST",
+    "http://127.0.0.1:4444"
+)
+
+PROJECT_ID = os.getenv(
+    "GCS_PROJECT_ID",
+    "local-project"
+)
+
+BUCKET_NAME = os.getenv(
+    "GCS_BUCKET_NAME",
+    "medallion-landing"
+)
+
 BLOB_NAME = "ventas/2026/11/20/ventas.csv"
+
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 DB_PATH = BASE_DIR / "warehouse" / "medallion.duckdb"

@@ -5,11 +5,26 @@ from pathlib import Path
 from google.auth.credentials import AnonymousCredentials
 from google.cloud import storage
 
-# 1. CONFIGURACIÓN DEL EMULADOR
-os.environ["STORAGE_EMULATOR_HOST"] = "http://127.0.0.1:4444"
 
-PROJECT_ID = "local-project"
-BUCKET_NAME = "medallion-landing"
+# ==========================================
+# CONFIGURACION DEL EMULADOR GCS
+# ==========================================
+
+os.environ.setdefault(
+    "STORAGE_EMULATOR_HOST",
+    "http://127.0.0.1:4444"
+)
+
+PROJECT_ID = os.getenv(
+    "GCS_PROJECT_ID",
+    "local-project"
+)
+
+BUCKET_NAME = os.getenv(
+    "GCS_BUCKET_NAME",
+    "medallion-landing"
+)
+
 
 # 2. UBICACIÓN DEL ARCHIVO CSV
 BASE_DIR = Path(__file__).resolve().parents[2]
@@ -32,11 +47,22 @@ def upload_to_landing():
         credentials=AnonymousCredentials()
     )
 
-    # Obtener referencia al bucket
+
+    # ==========================================
+    # VERIFICAR Y CREAR BUCKET SI NO EXISTE
+    # ==========================================
+
     bucket = client.bucket(BUCKET_NAME)
+
+    if not bucket.exists():
+        bucket = client.create_bucket(BUCKET_NAME)
+        print(f"Bucket creado: {BUCKET_NAME}")
+    else:
+        print(f"Bucket existente: {BUCKET_NAME}")
 
     # Crear referencia al objeto
     blob = bucket.blob(DESTINATION_BLOB)
+
 
     # Subir archivo CSV
     blob.upload_from_filename(

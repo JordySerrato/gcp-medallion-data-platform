@@ -16,10 +16,23 @@ from google.auth.credentials import AnonymousCredentials
 
 BASE_DIR = Path(__file__).resolve().parent
 
-os.environ["FIRESTORE_EMULATOR_HOST"] = "127.0.0.1:8080"
 
-PROJECT_ID = "demo-medallion"
+# ==========================================
+# CONFIGURACION LOCAL DE FIRESTORE
+# ==========================================
+
+os.environ.setdefault(
+    "FIRESTORE_EMULATOR_HOST",
+    "127.0.0.1:8080"
+)
+
+PROJECT_ID = os.getenv(
+    "FIRESTORE_PROJECT_ID",
+    "demo-medallion"
+)
+
 PIPELINE_NAME = "ventas_medallion"
+
 
 # ==========================================
 # 2. CONEXIÓN A FIRESTORE
