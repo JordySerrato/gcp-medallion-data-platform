@@ -284,7 +284,12 @@ def obtener_ventas_categorias():
 def obtener_ejecuciones_pipeline():
 
     # Configurar Firestore Emulator local
-    os.environ["FIRESTORE_EMULATOR_HOST"] = "127.0.0.1:8080"
+    
+    os.environ.setdefault(
+        "FIRESTORE_EMULATOR_HOST",
+        "127.0.0.1:8080"
+    )
+
 
     try:
         # Conectar con Firestore

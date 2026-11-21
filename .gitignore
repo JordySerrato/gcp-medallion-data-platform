@@ -28,3 +28,4 @@ dist/
 .idea/
 *.log
 .DS_Store
+data/firestore-export/

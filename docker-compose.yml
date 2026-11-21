@@ -2,6 +2,11 @@
 name: gcp-medallion-local
 
 services:
+
+  # ==========================================
+  # 1. GOOGLE CLOUD STORAGE EMULATOR
+  # ==========================================
+
   gcs-emulator:
     image: fsouza/fake-gcs-server:latest
 
@@ -14,5 +19,43 @@ services:
 
     volumes:
       - ./data/landing:/data
+
+    restart: unless-stopped
+
+  # ==========================================
+  # 2. BACKEND FASTAPI
+  # ==========================================
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+
+    ports:
+      - "127.0.0.1:8001:8000"
+
+    volumes:
+      - ./warehouse:/app/warehouse:ro
+
+    environment:
+      FIRESTORE_EMULATOR_HOST: host.docker.internal:8080
+      GOOGLE_CLOUD_PROJECT: demo-medallion
+
+    restart: unless-stopped
+
+  # ==========================================
+  # 3. FRONTEND REACT + NGINX
+  # ==========================================
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    ports:
+      - "127.0.0.1:8081:80"
+
+    depends_on:
+      - backend
 
     restart: unless-stopped
