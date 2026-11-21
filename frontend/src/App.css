@@ -1,0 +1,360 @@
+
+/* ==========================================
+   1. ESTILOS GENERALES
+========================================== */
+
+:root {
+  font-family: Inter, system-ui, sans-serif;
+  color: #e2e8f0;
+  background-color: #0b1120;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  display: block;
+  background: #0b1120;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ==========================================
+   2. CONTENEDOR PRINCIPAL
+========================================== */
+
+.dashboard {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 32px 72px;
+}
+
+/* ==========================================
+   3. ENCABEZADO
+========================================== */
+
+.dashboard-header {
+  padding: 32px;
+  margin-bottom: 36px;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  background: linear-gradient(
+    120deg,
+    #172554,
+    #0f172a 65%,
+    #111827
+  );
+}
+
+.dashboard-header h1 {
+  margin: 0 0 12px;
+  color: #f8fafc;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.dashboard-header p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 15px;
+}
+
+/* ==========================================
+   4. SECCIONES
+========================================== */
+
+.dashboard-section {
+  margin-bottom: 36px;
+}
+
+.dashboard-section h2 {
+  margin: 0 0 20px;
+  color: #f1f5f9;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* ==========================================
+   5. INDICADORES GENERALES
+========================================== */
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.metric-card {
+  min-height: 145px;
+  padding: 24px;
+  border: 1px solid #334155;
+  border-radius: 14px;
+  background: #1e293b;
+  transition: transform 0.2s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-3px);
+  border-color: #3b82f6;
+}
+
+.metric-card h3 {
+  margin: 0 0 22px;
+  color: #94a3b8;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.metric-card p {
+  margin: 0;
+  color: #f8fafc;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+/* ==========================================
+   6. ANALITICA GOLD
+========================================== */
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.chart-card {
+  min-height: 280px;
+  padding: 24px;
+  border: 1px solid #334155;
+  border-radius: 14px;
+  background: #1e293b;
+}
+
+.chart-card h3 {
+  margin: 0 0 30px;
+  color: #f1f5f9;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.chart-card p {
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   7. MONITOREO DEL PIPELINE
+========================================== */
+
+.pipeline-card {
+  padding: 28px;
+  border: 1px solid #334155;
+  border-radius: 14px;
+  background: #1e293b;
+}
+
+.pipeline-card p {
+  margin: 0 0 12px;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.pipeline-card p:last-child {
+  margin-bottom: 0;
+  color: #94a3b8;
+}
+
+/* ==========================================
+   8. RESPONSIVE
+========================================== */
+
+@media (max-width: 1100px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .charts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .dashboard {
+    padding: 20px 16px 48px;
+  }
+
+  .dashboard-header {
+    padding: 24px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 24px;
+  }
+
+  .metrics-grid,
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-card {
+    min-height: 220px;
+  }
+}
+
+/* ==========================================
+   9. MONITOR DEL PIPELINE MEDALLION
+========================================== */
+
+.pipeline-monitor {
+  width: 100%;
+}
+
+.pipeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.pipeline-header h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  color: #f8fafc;
+}
+
+.pipeline-header p {
+  margin: 0;
+  color: #94a3b8;
+}
+
+/* ESTADO GENERAL */
+
+.pipeline-status,
+.stage-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* COLORES POR ESTADO */
+
+.pipeline-status.completed,
+.stage-status.completed {
+  background: #064e3b;
+  color: #6ee7b7;
+}
+
+.pipeline-status.failed,
+.stage-status.failed {
+  background: #7f1d1d;
+  color: #fca5a5;
+}
+
+.pipeline-status.running,
+.stage-status.running {
+  background: #1e3a8a;
+  color: #93c5fd;
+}
+
+.pipeline-status.pending,
+.stage-status.pending {
+  background: #334155;
+  color: #cbd5e1;
+}
+
+/* INFORMACIÓN DE LA EJECUCIÓN */
+
+.pipeline-info {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  background: #0f172a;
+}
+
+.pipeline-info p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.pipeline-info strong {
+  color: #f1f5f9;
+}
+
+/* LISTADO DE ETAPAS */
+
+.pipeline-monitor h4 {
+  margin: 0 0 16px;
+  color: #f1f5f9;
+  font-size: 16px;
+}
+
+.pipeline-stages {
+  display: grid;
+  gap: 12px;
+}
+
+.pipeline-stage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  background: #0f172a;
+}
+
+.stage-name {
+  color: #e2e8f0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* MENSAJES DE ERROR */
+
+.pipeline-error {
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid #ef4444;
+  border-radius: 8px;
+  background: #450a0a;
+  color: #fecaca;
+}
+
+/* ADAPTACIÓN MÓVIL */
+
+@media (max-width: 700px) {
+  .pipeline-stage {
+    padding: 14px;
+  }
+
+  .stage-name {
+    font-size: 12px;
+  }
+
+  .stage-status {
+    font-size: 10px;
+  }
+}
